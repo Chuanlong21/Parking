@@ -1,0 +1,148 @@
+body { margin: 0; padding: 0;}
+
+label{
+    width: 400px;
+    text-align: left;
+    display: inline-block;
+    padding: 30px;
+    font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 20px;
+}
+
+.input-box{
+
+    box-sizing: border-box;
+
+    width: 280px;
+    height: 40px;
+
+    border: 2px solid lightgrey;
+    border-radius: 15px;
+
+}
+
+.top-nav{
+    position: absolute;
+    width: 100%;
+    height: 20%;
+    margin: 0 auto;
+    padding: 0;
+    background: #0d6efd;
+    border-bottom: 8px solid black;
+}
+.pay-show{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 10px 10px 3px 20px;
+    gap: 10px;
+
+    position: fixed;
+    top: 40%;
+    left: 10%;
+    width: 25%;
+    height: 30%;
+    border: 8px solid black;
+    border-radius: 10%;
+}
+
+.name{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    position: relative;
+    top: 20%;
+    left: 5%;
+    width: 277px;
+    height: 68px;
+}
+
+
+.info{
+    position: absolute;
+    left: 42%;
+    top: 38%;
+
+}
+
+
+
+#commer{
+    width: 277px;
+    height: 27px;
+
+    font-family: 'Helvetica', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 20px;
+
+    color: #fff;
+}
+#station{
+    width: 197px;
+    height: 41px;
+
+    font-family: 'Helvetica', serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 41px;
+    color: #fff;
+}
+
+#money{
+    position: relative;
+    width: 220px;
+    height: 54px;
+    left: 10%;
+    top: 45%;
+
+    font-family: 'Helvetica', serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 96px;
+    line-height: 16px;
+    /* or 17% */
+
+    color: #000000;
+
+}
+
+#money-symbol{
+    position: relative;
+    width: 90px;
+    height: 127px;
+    left: 15%;
+    top: 45%;
+
+    font-family: 'Helvetica', serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 90px;
+    line-height: 16px;
+    /* or 18% */
+
+
+    color: #000000;
+}
+
+#heads-up{
+    position: relative;
+    left: 20%;
+    color: grey;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 20px;
+}
+
+#btn{
+    position: relative;
+    left: 86%;
+}

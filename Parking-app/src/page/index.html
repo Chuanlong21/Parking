@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="./js/pay.js"></script>
+</head>
+<body >
+<div class="top-nav" >
+    <div class="name">
+    <h1 id="station">Pay Station</h1>
+    <text id="commer">Pay your parking bills online...</text>
+    </div>
+
+    <button type="button" class="btn text-bg-warning" style="position: relative; left: 76%; bottom: 10%">
+        Available Spots <span class="badge text-bg-success">4</span>
+    </button>
+</div></br>
+
+<div class="pay-show">
+    <p id ="money-symbol">$</p>
+    <p id="money">0</p>
+</div>
+
+<form class="info" onsubmit="submitForm()">
+        <p>
+            <label>Parking Time(1c/min):</label>
+            <input id="parking_time" type="number" min="0" class="input-box" value=""><br>
+        </p>
+        <p>
+            <label>Plate Number:</label>
+            <input id="plate_number" type="text" class="input-box"><br>
+        </p>
+        <p>
+            <label>Your Ethereum account:</label>
+            <input id="ethereum_account" type="text" class="input-box"><br>
+        </p>
+        <p>
+            <label>To Ethereum account:</label>
+            <input id="to_account" type="text" class="input-box">
+        </p>
+        <p style="position: relative; padding-top: 40px" >
+            <button type="submit" class="btn btn-primary btn-lg" id="btn">Submit</button>
+        </p>
+</form>
+
+<script>
+    const parkingTimeInput = document.getElementById("parking_time");
+    const moneyElement = document.getElementById("money");
+
+    // 添加事件监听器，以在输入更改时更新money元素
+    parkingTimeInput.addEventListener("input", function() {
+    const parkingTime = parseFloat(parkingTimeInput.value);
+    moneyElement.textContent = parkingTime.toFixed(0);
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+
+</body>
+</html>
