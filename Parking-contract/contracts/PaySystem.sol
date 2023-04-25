@@ -40,7 +40,7 @@ contract PaySystem is Ownable, ERC1155 {
     function burn(address account, uint256 id, uint256 amount) public onlyOwner {
         _burn(account, id, amount);
     }
-
+    //id为0
     function getBalance(address account, uint256 id) public view onlyUser returns (uint256 balance) {
         balance = balanceOf(account, id);
     }
