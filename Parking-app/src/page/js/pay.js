@@ -531,9 +531,11 @@ App = {
             App.handleDeposit(jQuery("#send_value").val());
         });
 
-        $(document).on("click", ".check_balance", function (){
-            if (jQuery("#sender_address").val != null) {
-                App.handleBalance(jQuery("#sender_address").val());
+        $(document).on("submit", ".check_balance", function (){
+            var addr = jQuery("#sender_address");
+            if (addr.val != null) {
+                App.handleBalance(addr.val());
+                
             }
             else {
                 alert("Please enter an account number!")

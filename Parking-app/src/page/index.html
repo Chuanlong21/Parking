@@ -16,11 +16,6 @@
     <text id="commer">Pay your parking bills online...</text>
     </div>
 
-    <a href="login.html">
-        <button type="button" class="btn text-bg-warning" style="position: relative; left: 76%; bottom: 10%">
-            Deposit and Check Balance <span class="badge text-bg-success">go!</span>
-        </button>
-    </a>
 </div></br>
 
 <div class="pay-show">
@@ -28,36 +23,65 @@
     <p id="money">0</p>
 </div>
 
+<div class="left_side">
+    <form class="deposit">
+        <p id="address">
+            <label class="transaction">Your address</label> <br> <br>
+            <input id="sender_address" type="text" class="input-box" value=""> <br> <br>
+        </p>
+    
+        <p id="amount">
+            <label class="transaction">Deposit amount(ETH)</label> <br> <br>
+            <input id="send_value" type="number" min="0" class="input-box" placeholder="1 eth = 10 coins" value="">
+        </p>
+    
+        <button type="submit" class="btn btn-primary btn-lg" id="deposit_btn">Deposit</button>
+    </form>
+    
+    <form class="check_balance">
+            <button type="submit" class="btn btn-primary btn-lg" id="balance_btn">Check Balance</button>
+    </form>
+
+    <div id="look_balance">
+        Your current balance is: 
+    </div>
+</div>
+    
+<div style='width:0%;border-right:4px solid black;height:1000px;margin: auto;'></div>
+
 <form class="info">
-        <p>
-            <label>Parking Time(1c/min):</label>
-            <input id="parking_time" type="number" min="0" class="input-box" value=""><br>
-        </p>
-        <p>
-            <label>Plate Number:</label>
-            <input id="plate_number" type="text" class="input-box"><br>
-        </p>
-        <p>
-            <label>Your Ethereum account:</label>
-            <input id="ethereum_account" type="text" class="input-box"><br>
-        </p>
-        <p>
-            <label>To Ethereum account:</label>
-            <input id="to_account" type="text" class="input-box">
-        </p>
-        <p style="position: relative; padding-top: 40px" >
-            <button type="submit" class="btn btn-primary btn-lg" id="btn">Submit</button>
-        </p>
+    <p>
+        <label class="trade">Parking Time(1c/min):</label>
+        <input id="parking_time" type="number" min="0" class="input-box" value=""><br>
+    </p>
+    <p>
+        <label class="trade">Plate Number:</label>
+        <input id="plate_number" type="text" class="input-box"><br>
+    </p>
+    <p>
+        <label class="trade">Your Ethereum account:</label>
+        <input id="ethereum_account" type="text" class="input-box"><br>
+    </p>
+    <p>
+        <label class="trade">To Ethereum account:</label>
+        <input id="to_account" type="text" class="input-box">
+    </p>
+    <p style="position: relative; padding-top: 40px" >
+        <button type="submit" class="btn btn-primary btn-lg" id="submit_btn">Submit</button>
+    </p>
 </form>
 
 <script>
     const parkingTimeInput = document.getElementById("parking_time");
     const moneyElement = document.getElementById("money");
 
-    // 添加事件监听器，以在输入更改时更新money元素
     parkingTimeInput.addEventListener("input", function() {
-    const parkingTime = parseFloat(parkingTimeInput.value);
-    moneyElement.textContent = parkingTime.toFixed(0);
+        const parkingTime = parseFloat(parkingTimeInput.value);
+        if(!isNaN(parkingTime)) {
+            moneyElement.textContent = parkingTime.toFixed(0);
+        } else {
+            moneyElement.textContent = "0";
+        }
     });
 </script>
 <script  src="js/toastr.min.js"></script>
