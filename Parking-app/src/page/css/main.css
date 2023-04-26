@@ -13,7 +13,7 @@ label{
 }
 
 .input-box{
-
+    padding-left: 10px;
     box-sizing: border-box;
 
     width: 280px;
