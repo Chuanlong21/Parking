@@ -11,6 +11,7 @@ contract PaySystem is Ownable, ERC1155 {
     string private name = "Unpaid Worker";
     string private symbol = "UW";
     uint256 private totalSupply = 1000000;
+    uint256 private coinPrice;
     //默认设置为0
     // uint256 public constant tokenId = 0;
 
@@ -21,6 +22,7 @@ contract PaySystem is Ownable, ERC1155 {
 
     constructor() ERC1155(baseURI) {
         _mint(msg.sender, 0, totalSupply, "");
+        coinPrice = 0.1 ether;
     }
 
     modifier onlyUser() {
@@ -43,6 +45,9 @@ contract PaySystem is Ownable, ERC1155 {
     //id为0
     function getBalance(address account, uint256 id) public view onlyUser returns (uint256 balance) {
         balance = balanceOf(account, id);
+    }
+    function getCoinPrice() public view returns (uint256 price) {
+        price = coinPrice;
     }
 
     function deposit(uint amount) public onlyUser moneyGreaterThanZero(amount) {

@@ -486,7 +486,6 @@ App = {
     ],
 
     init: function () {
-        console.log("hahhah");
         return App.initWeb3();
     },
 
@@ -502,8 +501,13 @@ App = {
     },
 
     initContract: function () {
-        App.contracts.PaySystem = new App.web3.eth.Contract(App.abi, App.address, {});
+        App.contracts.PaySystem = new App.web3.eth.Contract(App.abi, App.address, {gas:3000000});
         return App.bindEvents();
+    },
+
+    populateAddress: async function () {
+        const accounts = await App.web3.eth.getAccounts();
+        App.handler = accounts[0];
     },
 
     bindEvents: function () {
@@ -511,16 +515,28 @@ App = {
             App.handleDeposit(jQuery("#parking_time").val());
         });
 
+        $(document).on("click", "#balance", function (){
+            App.handleBalance();
+        });
+
+        $(document).on("submit", ".info", function (){
+            App.handleTrade(jQuery("#ethereum_account").val(), jQuery("#to_account").val(), jQuery("#parking_time").val());
+        });
+
+        App.populateAddress();
     },
 
-    handleDeposit: function (money){
+    handleDeposit: async function (money) {
         if (money === "") {
-            toastr.error("Please enter a valid initializing value.", "Reverted!");
+            toastr.error("Please enter a valid value.", "Reverted!");
             return false;
         }
+        const coinPrice = await App.contracts.PaySystem.methods.getCoinPrice().call({from: App.handler});
+        const depositAmount = web3.utils.toWei(money, 'ether') / coinPrice;
+
         App.contracts.PaySystem.methods
-            .deposit(money)
-            .send({from : App.handler})
+            .deposit(depositAmount)
+            .send({from: App.handler})
             .on("receipt", (receipt) => {
                 toastr.success("Success! " + money + " has deposit to your account.");
             })
@@ -529,11 +545,39 @@ App = {
             });
     },
 
+    handleBalance: async function (account) {
+        return App.contracts.PaySystem.methods
+            .getBalance(account, 0)
+            .call({from: App.handler});
+    },
+
+    handleTrade: async function (account, payTo, money) {
+        if (money === "") {
+            toastr.error("Please enter a valid value.", "Reverted!");
+            return false;
+        }
+        const balance = App.handleBalance(account);
+
+        if (balance < money) {
+            toastr.error("You balance is not enough to pay", "Reverted!");
+            return false;
+        }
+        App.contracts.PaySystem.methods
+            .trade(payTo, money)
+            .send({from: App.handler})
+            .on("receipt", (receipt) => {
+                toastr.success("Success! " + money + " sent to " + payTo + ".");
+            })
+            .on("error", (err) => {
+                toastr.error(App.getError(err), "Reverted!");
+            });
+
+    },
+
     getError: function (error) {
         const errorCode = error.code;
         // const errorMessage = error.message;
         // let errorReason = "";
-
         if (errorCode === 4001) {
             return "User rejected the request!";
         }  else {
@@ -544,4 +588,31 @@ App = {
 
 };
 
-App.init();
+$(function () {
+    $(window).load(function () {
+        App.init();
+        toastr.options = {
+            closeButton: true,
+            debug: false,
+            newestOnTop: false,
+            progressBar: false,
+            positionClass: "toast-bottom-full-width",
+            preventDuplicates: false,
+            onclick: null,
+            showDuration: "300",
+            hideDuration: "1000",
+            timeOut: "5000",
+            extendedTimeOut: "1000",
+            showEasing: "swing",
+            hideEasing: "linear",
+            showMethod: "fadeIn",
+            hideMethod: "fadeOut",
+        };
+    });
+});
+
+
+/* Detect when the account on metamask is changed */
+window.ethereum.on("accountsChanged", () => {
+    App.populateAddress();
+});
