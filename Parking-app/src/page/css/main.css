@@ -37,8 +37,7 @@ body { margin: 0; padding: 0; min-height: 100;}
     align-items: flex-start;
     padding: 10px 10px 3px 20px;
     gap: 7px;
-
-    position: fixed;
+    position: absolute;
     top: 22%;
     left: 60%;
     width: 30%;
@@ -176,6 +175,7 @@ body { margin: 0; padding: 0; min-height: 100;}
 
 
 #look_balance{
+    position: relative;
     text-align: left;
     display: inline-block;
     padding-top: 80%;
