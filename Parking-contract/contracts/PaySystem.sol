@@ -50,8 +50,11 @@ contract PaySystem is Ownable, ERC1155 {
         price = coinPrice;
     }
 
-    function deposit(uint amount) public onlyUser moneyGreaterThanZero(amount) {
+    function deposit(uint amount) public payable onlyUser moneyGreaterThanZero(amount) {
         require(balanceOf(owner(), 0) >= amount, "Insufficient balance of token");
+        require(msg.value > 0, "Invalid amount");
+        address payable ownerAddress = payable(owner());
+        ownerAddress.transfer(msg.value);
         _safeTransferFrom(owner(), msg.sender, 0, amount, "");
     }
 
