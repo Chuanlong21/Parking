@@ -1,6 +1,6 @@
 
 App = {
-    address: "0x087AC47D5eE03c9778a165c1E9De9cAEFb11dAd8",
+    address: "0xE468691F829e2b6AAf8E2BBb72D3204B63e13Dd0",
     web3: null,
     contracts: {},
     network_id: 1337,
